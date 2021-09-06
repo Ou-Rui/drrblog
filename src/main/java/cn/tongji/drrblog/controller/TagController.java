@@ -4,12 +4,10 @@ package cn.tongji.drrblog.controller;
 import cn.tongji.drrblog.common.ResponseData;
 import cn.tongji.drrblog.pojo.vo.TagVo;
 import cn.tongji.drrblog.service.TagService;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,14 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
+
+    @PostMapping("/new")
+    public ResponseData newTag(@RequestBody JSONObject json) {
+        Long tagId = tagService.newTag(json);
+        if (tagId == null)
+            return ResponseData.error("该标签已存在！");
+        return ResponseData.ok();
+    }
 
     @GetMapping("/all")
     public ResponseData allTags() {

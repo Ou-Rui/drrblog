@@ -12,4 +12,5 @@ public interface CategoryDao extends BaseMapper<CategoryEntity> {
 
     List<CategoryVo> getAllCategories();
 
+    Long getCategoryIdByName(String name);
 }

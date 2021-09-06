@@ -2,12 +2,10 @@ package cn.tongji.drrblog.controller;
 import cn.tongji.drrblog.common.ResponseData;
 import cn.tongji.drrblog.pojo.vo.CategoryVo;
 import cn.tongji.drrblog.service.CategoryService;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +17,15 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+
+    @PostMapping("/new")
+    public ResponseData newCategory(@RequestBody JSONObject json) {
+        Long categoryId = categoryService.newCategory(json);
+        if (categoryId == null)
+            return ResponseData.error("该分类已存在");
+        return ResponseData.ok();
+    }
 
     @GetMapping("/all")
     public ResponseData allCategories() {

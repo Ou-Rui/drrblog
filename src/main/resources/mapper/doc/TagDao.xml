@@ -9,4 +9,9 @@
         group by t.id
     </select>
 
+    <select id="getTagIdByName" parameterType="String" resultType="Long">
+        select t.id from drrblog_tag t
+        where t.name = #{name}
+    </select>
+
 </mapper>

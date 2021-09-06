@@ -9,4 +9,8 @@
         group by c.id
     </select>
 
+    <select id="getCategoryIdByName" parameterType="String" resultType="Long">
+        select c.id from drrblog_category c
+        where c.name = #{name}
+    </select>
 </mapper>
