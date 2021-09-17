@@ -20,11 +20,11 @@ public class TagServiceImpl extends ServiceImpl<TagDao, TagEntity> implements Ta
      * @return 新标签的id，若创建失败，return null
      */
     @Override
-    public Long newTag(JSONObject json) {
+    public Integer newTag(JSONObject json) {
         TagEntity tag = new TagEntity();
 
         tag.setName(json.getString("name"));
-        Long id = getTagIdByName(tag.getName());
+        Integer id = getTagIdByName(tag.getName());
         // 如果id非空，说明该tag已存在
         if (id != null)     return null;
 
@@ -37,12 +37,12 @@ public class TagServiceImpl extends ServiceImpl<TagDao, TagEntity> implements Ta
     }
 
     @Override
-    public Long updateTag(JSONObject json) {
+    public Integer updateTag(JSONObject json) {
         return null;
     }
 
     @Override
-    public TagEntity getTagById(Long id) {
+    public TagEntity getTagById(Integer id) {
         return null;
     }
 
@@ -52,7 +52,7 @@ public class TagServiceImpl extends ServiceImpl<TagDao, TagEntity> implements Ta
     }
 
     @Override
-    public Long getTagIdByName(String name) {
+    public Integer getTagIdByName(String name) {
         return this.baseMapper.getTagIdByName(name);
     }
 }

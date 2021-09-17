@@ -10,15 +10,15 @@ import java.util.List;
 public interface TagService extends IService<TagEntity> {
     public static final String TAG_SPLITTER = ",";
 
-    Long newTag(JSONObject json);
+    Integer newTag(JSONObject json);
 
-    Long updateTag(JSONObject json);
+    Integer updateTag(JSONObject json);
 
-    TagEntity getTagById(Long id);
+    TagEntity getTagById(Integer id);
 
     List<TagVo> getAllTags();
 
-    Long getTagIdByName(String name);
+    Integer getTagIdByName(String name);
 
 
 

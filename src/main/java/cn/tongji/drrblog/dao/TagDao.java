@@ -13,5 +13,5 @@ public interface TagDao extends BaseMapper<TagEntity> {
 
     List<TagVo> getAllTags();
 
-    Long getTagIdByName(String name);
+    Integer getTagIdByName(String name);
 }

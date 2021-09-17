@@ -1,4 +1,5 @@
 package cn.tongji.drrblog.controller;
+
 import cn.tongji.drrblog.common.ResponseData;
 import cn.tongji.drrblog.pojo.vo.CategoryVo;
 import cn.tongji.drrblog.service.CategoryService;
@@ -21,9 +22,8 @@ public class CategoryController {
 
     @PostMapping("/new")
     public ResponseData newCategory(@RequestBody JSONObject json) {
-        Long categoryId = categoryService.newCategory(json);
-        if (categoryId == null)
-            return ResponseData.error("该分类已存在");
+        Integer categoryId = categoryService.newCategory(json);
+        if (categoryId == null)     return ResponseData.error("该分类已存在");
         return ResponseData.ok();
     }
 

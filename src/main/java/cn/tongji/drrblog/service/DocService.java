@@ -2,8 +2,12 @@ package cn.tongji.drrblog.service;
 
 
 import cn.tongji.drrblog.pojo.entity.DocEntity;
+import cn.tongji.drrblog.pojo.entity.FilterEntity;
+import cn.tongji.drrblog.pojo.vo.DocVo;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.service.IService;
+
+import java.util.List;
 
 public interface DocService extends IService<DocEntity> {
 
@@ -26,6 +30,10 @@ public interface DocService extends IService<DocEntity> {
      * @param id 文章ID
      * @return  doc的JSON格式数据
      */
-    JSONObject getDocById(Long id);
+    DocVo getDocById(Long id);
+
+
+    List<DocVo> getDocsByFilter(FilterEntity filter);
+
 
 }

@@ -10,8 +10,10 @@ import java.util.Date;
 @TableName("drrblog_tag")
 public class TagEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @TableId
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -21,11 +23,11 @@ public class TagEntity implements Serializable {
 
     private Date createTime;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CategoryService extends IService<CategoryEntity> {
 
-    Long newCategory(JSONObject json);
+    Integer newCategory(JSONObject json);
 
     /**
      * 获取所有的分类信息

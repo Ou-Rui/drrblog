@@ -24,7 +24,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      * @return 新分类的id，若创建失败，return null
      */
     @Override
-    public Long newCategory(JSONObject json) {
+    public Integer newCategory(JSONObject json) {
         CategoryEntity category = new CategoryEntity();
 
         category.setName(json.getString("name"));

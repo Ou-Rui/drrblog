@@ -4,9 +4,14 @@ package cn.tongji.drrblog.pojo.entity;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
+import java.io.Serializable;
+
 // 文章与标签的对应关系表
 @TableName("drrblog_doc_tag")
-public class DocTagEntity {
+public class DocTagEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @TableId
     private Long id;
 

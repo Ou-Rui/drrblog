@@ -3,6 +3,38 @@
 
 <mapper namespace="cn.tongji.drrblog.dao.DocDao">
 
+    <select id="getDocById" resultType="cn.tongji.drrblog.pojo.vo.DocVo">
+        select d.*, c.name as category from drrblog_doc d
+            left join drrblog_category c on d.category_id = c.id
+        where d.id = #{id}
+    </select>
 
+    <select id="getAllDocs" resultType="cn.tongji.drrblog.pojo.vo.DocVo">
+        select d.*, c.name as category from drrblog_doc d
+            left join drrblog_category c
+        on d.category_id = c.id
+    </select>
+
+    <select id="getDocsProfileByFilter" parameterType="cn.tongji.drrblog.pojo.entity.FilterEntity"
+            resultType="cn.tongji.drrblog.pojo.vo.DocVo">
+        select d.id, d.title, d.summary, d.category_id, d.tags, d.create_time, d.update_time, c.name as category
+        from drrblog_doc d
+            # 多个tag匹配
+            <if test="tagIds != null">
+                <foreach collection="tagIds" item="tag" index="index">
+                    join drrblog_doc_tag dt#{index} on d.id = dt#{index}.doc_id and dt#{index}.tag_id = #{tag}
+                </foreach>
+            </if>
+            left join drrblog_category c
+        on d.category_id = c.id
+        where 1=1
+        # category匹配
+        <if test="categoryId != null"> and d.category_id = #{categoryId}</if>
+        # 限制数量与偏置
+        <if test="num != null">
+            LIMIT #{num}
+            <if test="offset != null"> , #{offset} </if>
+        </if>
+    </select>
 
 </mapper>

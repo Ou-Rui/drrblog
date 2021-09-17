@@ -1,6 +1,5 @@
 package cn.tongji.drrblog.controller;
 
-
 import cn.tongji.drrblog.common.ResponseData;
 import cn.tongji.drrblog.pojo.vo.TagVo;
 import cn.tongji.drrblog.service.TagService;
@@ -22,7 +21,7 @@ public class TagController {
 
     @PostMapping("/new")
     public ResponseData newTag(@RequestBody JSONObject json) {
-        Long tagId = tagService.newTag(json);
+        Integer tagId = tagService.newTag(json);
         if (tagId == null)
             return ResponseData.error("该标签已存在！");
         return ResponseData.ok();

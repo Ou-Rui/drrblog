@@ -2,6 +2,8 @@ package cn.tongji.drrblog.service.impl;
 
 import cn.tongji.drrblog.dao.DocDao;
 import cn.tongji.drrblog.pojo.entity.DocEntity;
+import cn.tongji.drrblog.pojo.entity.FilterEntity;
+import cn.tongji.drrblog.pojo.vo.DocVo;
 import cn.tongji.drrblog.service.DocService;
 import cn.tongji.drrblog.service.TagService;
 import com.alibaba.fastjson.JSONArray;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service("docService")
@@ -59,7 +62,14 @@ public class DocServiceImpl extends ServiceImpl<DocDao, DocEntity> implements Do
     }
 
     @Override
-    public JSONObject getDocById(Long id) {
-        return null;
+    public DocVo getDocById(Long id) {
+        DocVo doc = this.baseMapper.getDocById(id);
+        return doc;
+    }
+
+    @Override
+    public List<DocVo> getDocsByFilter(FilterEntity filter) {
+        List<DocVo> docs = this.baseMapper.getDocsProfileByFilter(filter);
+        return docs;
     }
 }
