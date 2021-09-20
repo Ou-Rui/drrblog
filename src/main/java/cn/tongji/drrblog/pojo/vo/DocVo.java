@@ -1,8 +1,12 @@
 package cn.tongji.drrblog.pojo.vo;
 
 import cn.tongji.drrblog.pojo.entity.DocEntity;
+import cn.tongji.drrblog.pojo.item.CategoryItem;
+import cn.tongji.drrblog.pojo.item.TagItem;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DocVo {
 
@@ -12,9 +16,9 @@ public class DocVo {
 
     private String summary;     // 摘要
 
-    private Integer categoryId; // 分类ID
+    private CategoryItem categoryItem;  // 分类
 
-    private String tags;        // 文章标签
+    private ArrayList<TagItem> tagItems;         // 标签
 
     private String content;     // 内容.txt
 
@@ -48,20 +52,20 @@ public class DocVo {
         this.summary = summary;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public CategoryItem getCategoryItem() {
+        return categoryItem;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryItem(CategoryItem categoryItem) {
+        this.categoryItem = categoryItem;
     }
 
-    public String getTags() {
-        return tags;
+    public ArrayList<TagItem> getTagItems() {
+        return tagItems;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void setTagItems(ArrayList<TagItem> tags) {
+        this.tagItems = tags;
     }
 
     public String getContent() {

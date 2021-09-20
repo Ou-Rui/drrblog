@@ -3,21 +3,43 @@
 
 <mapper namespace="cn.tongji.drrblog.dao.DocDao">
 
-    <select id="getDocById" resultType="cn.tongji.drrblog.pojo.vo.DocVo">
-        select d.*, c.name as category from drrblog_doc d
+    <resultMap id="DocVo" type="DocVo">
+        <id property="id" column="id"/>
+
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="content" column="content"/>
+        <result property="contentHtml" column="content_html"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+
+        <association property="categoryItem" javaType="CategoryItem">
+            <id property="id" column="category_id"/>
+            <result property="name" column="category_name"/>
+        </association>
+
+        <collection property="tagItems" javaType="ArrayList" column="{docId=id}"
+                    ofType="TagItem" select="selectTagItems">
+            <id property="id" column="tag_id"/>
+            <result property="name" column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDocById" resultMap="DocVo">
+        select d.*, c.name as category_name from drrblog_doc d
             left join drrblog_category c on d.category_id = c.id
         where d.id = #{id}
     </select>
 
-    <select id="getAllDocs" resultType="cn.tongji.drrblog.pojo.vo.DocVo">
+    <select id="getAllDocs" resultMap="DocVo">
         select d.*, c.name as category from drrblog_doc d
             left join drrblog_category c
         on d.category_id = c.id
     </select>
 
-    <select id="getDocsProfileByFilter" parameterType="cn.tongji.drrblog.pojo.entity.FilterEntity"
-            resultType="cn.tongji.drrblog.pojo.vo.DocVo">
-        select d.id, d.title, d.summary, d.category_id, d.tags, d.create_time, d.update_time, c.name as category
+    <select id="getDocsProfileByFilter" parameterType="FilterEntity" resultMap="DocVo">
+        select d.id, d.title, d.summary, d.category_id, d.create_time, d.update_time,
+               c.name as category_name
         from drrblog_doc d
             # 多个tag匹配
             <if test="tagIds != null">
@@ -25,8 +47,7 @@
                     join drrblog_doc_tag dt#{index} on d.id = dt#{index}.doc_id and dt#{index}.tag_id = #{tag}
                 </foreach>
             </if>
-            left join drrblog_category c
-        on d.category_id = c.id
+        left join drrblog_category c on d.category_id = c.id
         where 1=1
         # category匹配
         <if test="categoryId != null"> and d.category_id = #{categoryId}</if>
@@ -37,4 +58,9 @@
         </if>
     </select>
 
+    <select id="selectTagItems" resultType="TagItem">
+        select t.id, t.name from drrblog_tag t
+        left join drrblog_doc_tag dt on t.id = dt.tag_id
+        where dt.doc_id = #{docId}
+    </select>
 </mapper>
