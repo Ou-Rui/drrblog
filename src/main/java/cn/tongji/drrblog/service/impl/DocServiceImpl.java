@@ -2,6 +2,7 @@ package cn.tongji.drrblog.service.impl;
 
 import cn.tongji.drrblog.dao.DocDao;
 import cn.tongji.drrblog.pojo.entity.DocEntity;
+import cn.tongji.drrblog.pojo.entity.DocTagEntity;
 import cn.tongji.drrblog.pojo.entity.FilterEntity;
 import cn.tongji.drrblog.pojo.vo.DocVo;
 import cn.tongji.drrblog.service.DocService;
@@ -39,14 +40,14 @@ public class DocServiceImpl extends ServiceImpl<DocDao, DocEntity> implements Do
         StringBuilder tagsStr= new StringBuilder();
         for (int i = 0; i < tagsArray.size(); i++) {
             if (i != 0)     tagsStr.append(tagService.TAG_SPLITTER);
-            tagsStr.append(tagsArray.getString(i));
+            tagsStr.append(tagsArray.getJSONObject(i).getString("name"));
         }
         doc.setTags(tagsStr.toString());
 
         // 设置正文信息
-        JSONObject body = json.getJSONObject("body");
-        doc.setContent(body.getString("content"));
-        doc.setContentHtml(body.getString("contentHtml"));
+
+        doc.setContent(json.getString("content"));
+        doc.setContentHtml(json.getString("contentHtml"));
 
         doc.setCreateTime(new Date());
         doc.setUpdateTime(new Date());

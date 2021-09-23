@@ -6,6 +6,7 @@ import cn.tongji.drrblog.pojo.entity.DocEntity;
 import cn.tongji.drrblog.pojo.entity.FilterEntity;
 import cn.tongji.drrblog.pojo.vo.DocVo;
 import cn.tongji.drrblog.service.DocService;
+import cn.tongji.drrblog.service.DocTagService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -26,10 +27,14 @@ public class DocController {
     @Autowired
     DocService docService;
 
+    @Autowired
+    DocTagService docTagService;
+
     @PostMapping("/new")
     public ResponseData newDoc(@RequestBody JSONObject json) {
         Long id = docService.newDoc(json);
         if (id == null)     ResponseData.error("新建文章失败...");
+        else    docTagService.newDocTag(id,json);
         return ResponseData.ok();
     }
 

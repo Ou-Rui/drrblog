@@ -17,7 +17,7 @@ public class DocTagEntity implements Serializable {
 
     private Long docId;
 
-    private Long tagId;
+    private Integer tagId;
 
     public Long getId() {
         return id;
@@ -35,11 +35,11 @@ public class DocTagEntity implements Serializable {
         this.docId = docId;
     }
 
-    public Long getTagId() {
+    public Integer getTagId() {
         return tagId;
     }
 
-    public void setTagId(Long tagId) {
+    public void setTagId(Integer tagId) {
         this.tagId = tagId;
     }
 }
