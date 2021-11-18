@@ -2,6 +2,10 @@ package cn.tongji.drrblog.pojo.entity;
 
 import java.io.Serializable;
 
+
+/**
+ * FilterEntity 搜索过滤器
+ */
 public class FilterEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -10,6 +14,7 @@ public class FilterEntity implements Serializable {
 
     private Integer categoryId;
 
+    // 可以有多个Tag，目前是 && 的逻辑关系
     private Integer[] tagIds;
 
     private Integer num;

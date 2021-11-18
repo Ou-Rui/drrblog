@@ -30,6 +30,9 @@ public class DocController {
     @Autowired
     DocTagService docTagService;
 
+    /**
+     * 新建文章
+     */
     @PostMapping("/new")
     public ResponseData newDoc(@RequestBody JSONObject json) {
         Long id = docService.newDoc(json);
@@ -38,6 +41,9 @@ public class DocController {
         return ResponseData.ok();
     }
 
+    /**
+     * 根据 ID 获取文章内容
+     */
     @GetMapping("/get")
     public ResponseData getDocById(Long id) {
         if (id == null) {
@@ -47,6 +53,9 @@ public class DocController {
         return ResponseData.ok(doc);
     }
 
+    /**
+     * 根据 filter 获取文章内容
+     */
     @GetMapping("/filter")
     public ResponseData getDocsByFilter(FilterEntity filter) {
         List<DocVo> docs = docService.getDocsByFilter(filter);

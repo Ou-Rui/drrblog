@@ -20,6 +20,9 @@ public class CategoryController {
     private CategoryService categoryService;
 
 
+    /**
+     * 新建分类
+     */
     @PostMapping("/new")
     public ResponseData newCategory(@RequestBody JSONObject json) {
         Integer categoryId = categoryService.newCategory(json);
@@ -27,6 +30,9 @@ public class CategoryController {
         return ResponseData.ok();
     }
 
+    /**
+     * 获取全部的分类信息
+     */
     @GetMapping("/all")
     public ResponseData allCategories() {
         List<CategoryVo> categories = categoryService.getAllCategories();

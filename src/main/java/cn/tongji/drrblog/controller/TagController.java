@@ -19,6 +19,9 @@ public class TagController {
     @Autowired
     private TagService tagService;
 
+    /**
+     * 新建标签
+     */
     @PostMapping("/new")
     public ResponseData newTag(@RequestBody JSONObject json) {
         Integer tagId = tagService.newTag(json);
@@ -27,6 +30,9 @@ public class TagController {
         return ResponseData.ok();
     }
 
+    /**
+     * 获取全部的标签信息
+     */
     @GetMapping("/all")
     public ResponseData allTags() {
         List<TagVo> tags = tagService.getAllTags();

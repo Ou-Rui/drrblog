@@ -21,7 +21,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     /**
      * 新建一个分类
      * @param json 分类的信息包
-     * @return 新分类的id，若创建失败，return null
+     * @return 新分类的id，若创建失败（已存在同名category），return null
      */
     @Override
     public Integer newCategory(JSONObject json) {
